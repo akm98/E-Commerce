@@ -1,0 +1,22 @@
+.cart{
+   align-items: center;
+   justify-content: space-between;
+   margin:3rem 1rem;
+}
+.orders{
+   
+}
+.summary{
+    position: relative; 
+    vertical-align: top;
+    display: inline-block;
+    
+}
+.subtotal {
+    display: flex;
+    justify-content: space-between;
+    margin-block: 1rem;
+}
+.item img{
+    max-width: 200px;
+}

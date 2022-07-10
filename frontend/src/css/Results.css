@@ -1,0 +1,13 @@
+.flex-container{
+    display: flex;
+    flex-flow: row wrap;
+    margin-block: 2rem;
+}
+.filter{
+    border: 1px;
+    border-style: solid;
+    border-color: #d6d6d6;
+}
+.search-results{
+    
+}

@@ -74,3 +74,85 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
 		message: "product deleted sucessfully",
 	});
 });
+
+exports.createUpdateProductReview = catchAsyncErrors(async (req, res, next) => {
+	const { rating, comment, productId } = req.body;
+
+	const review = {
+		user: req.user._id,
+		name: req.user.name,
+		comment,
+		rating: Number(rating),
+	};
+
+	const product = await Product.findById(productId);
+	if (!product) {
+		return next(new ErrorHandler("Product not found", 404));
+	}
+
+	const isReviewed = product.reviews.find(
+		(each) => each.user._id.toString() === req.user.id.toString()
+	);
+
+	if (isReviewed) {
+		product.reviews.forEach((each) => {
+			if (each.user._id.toString() === req.user.id.toString())
+				(each.comment = comment), (each.rating = rating);
+		});
+	} else {
+		product.reviews.push(review);
+		product.numOfReviews = product.reviews.length;
+	}
+
+	let totalRatings = 0;
+	product.reviews.forEach((each) => (totalRatings += each.rating));
+
+	product.ratings = totalRatings / product.numOfReviews;
+
+	await product.save({ validateBeforeSave: false });
+
+	res.status(200).json({
+		success: true,
+	});
+});
+
+exports.getProductReviews = catchAsyncErrors(async (req, res, next) => {
+	const product = await Product.findById(req.params.id);
+
+	if (!product) {
+		return next(new ErrorHandler("Product not found", 404));
+	}
+	res.status(200).json({
+		success: true,
+		data: product.reviews,
+	});
+});
+
+exports.deleteReview = catchAsyncErrors(async (req, res, next) => {
+	const product = await Product.findById(req.params.id);
+
+	if (!product) {
+		return next(new ErrorHandler("Product not found", 404));
+	}
+
+	const reviews = product.reviews.filter(
+		(each) => each.user._id.toString() !== req.user.id.toString()
+	);
+
+	const currentReview = product.reviews.find(
+		(each) => each.user._id.toString() === req.user.id.toString()
+	);
+
+	product.ratings =
+		(product.ratings * product.numOfReviews - currentReview.rating) /
+		(product.numOfReviews - 1);
+
+	product.reviews = reviews;
+	product.numOfReviews -= 1;
+
+	await product.save({ validateBeforeSave: false });
+	res.status(200).json({
+		success: true,
+		data: product.reviews,
+	});
+});

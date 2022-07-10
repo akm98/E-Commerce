@@ -1,3 +1,7 @@
 {
-    "files.autoSave": "off"
+    "files.autoSave": "off",
+    "eslint.workingDirectories": [
+        "./backend", 
+        "./client"
+    ],
 }

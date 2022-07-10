@@ -51,6 +51,27 @@ exports.getAllUsers = catchAsyncErrors(async (req, res, next) => {
 	});
 });
 
+exports.getSingleUser = catchAsyncErrors(async (req, res, next) => {
+	const user = await User.findById(req.params.id);
+
+	if (!user) {
+		return next(new ErrorHandler("User not found", 404));
+	}
+	sendToken(user, 200, res);
+});
+
+exports.getCurrentUserDetails = catchAsyncErrors(async (req, res, next) => {
+	const user = await User.findById(req.user.id);
+
+	if (!user) {
+		return next(new ErrorHandler("User not found", 404));
+	}
+	res.status(200).json({
+		success: true,
+		user,
+	});
+});
+
 exports.logout = catchAsyncErrors((req, res, next) => {
 	cookiesOption = {
 		expires: new Date(Date.now()),
@@ -71,12 +92,9 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
 
 	const resetToken = user.getResetPasswordToken();
 
-	console.log("resetToken: ", resetToken);
-
 	// user.resertPasswordToken = resetToken;
 	// user.resertPasswordExpire = Date.now() + 5 * 60 * 1000;
 	await user.save({ validateBeforeSave: false });
-	console.log("user: ", user);
 
 	const resetUrl = `${req.protocol}://${req.get(
 		"host"
@@ -108,7 +126,6 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
 		.update(req.params.token)
 		.digest("hex");
 
-	console.log("resertPasswordToken: ", resertPasswordToken);
 	const user = await User.findOne({
 		resertPasswordToken,
 		resertPasswordExpire: { $gt: Date.now() },
@@ -131,4 +148,64 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
 	await user.save();
 
 	sendToken(user, 200, res);
+});
+
+// update user password
+exports.updatePassowrd = catchAsyncErrors(async (req, res, next) => {
+	const user = await User.findById(req.user.id).select("+password");
+	if (!user) {
+		return next(new ErrorHandler("User not found", 404));
+	}
+	const { oldPassword, newPassword, confirmPassword } = req.body;
+	isPasswordCorrect = await user.matchPassword(oldPassword);
+
+	if (!isPasswordCorrect) {
+		return next(new ErrorHandler("Wrong Old Password entered", 400));
+	}
+
+	if (newPassword !== confirmPassword) {
+		return next(new ErrorHandler("Password does not match", 400));
+	}
+
+	user.password = newPassword;
+	await user.save();
+
+	sendToken(user, 200, res);
+});
+
+exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
+	const newUserData = {
+		name: req.body.name,
+		email: req.body.email,
+	};
+
+	const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
+		new: true,
+		runValidators: true,
+		useFindAndModify: false,
+	});
+
+	res.status(200).json({
+		success: true,
+		user,
+	});
+});
+
+exports.updateUser = catchAsyncErrors(async (req, res, next) => {
+	const newUserData = {
+		name: req.body.name,
+		email: req.body.email,
+		role: req.body.role,
+	};
+
+	const user = await User.findByIdAndUpdate(req.params.id, newUserData, {
+		new: true,
+		runValidators: true,
+		useFindAndModify: false,
+	});
+
+	res.status(200).json({
+		success: true,
+		user,
+	});
 });
