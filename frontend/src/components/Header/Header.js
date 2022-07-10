@@ -23,18 +23,16 @@ const Header = () => {
 							Search{" "}
 							<span>
 								{" "}
-								<i class='fa-solid fa-magnifying-glass ' />{" "}
+								<i className='fa-solid fa-magnifying-glass ' />{" "}
 							</span>
 						</Link>
 					</Nav>
 
 					<Nav>
-						<Nav.Link>
-							<Link className='text-link' to='/cart'>
-								{" "}
-								Cart{" "}
-							</Link>
-						</Nav.Link>
+						<Link className='text-link' to='/cart'>
+							{" "}
+							Cart{" "}
+						</Link>
 
 						<Nav.Link>
 							<Link className='text-link' to='/profile'>

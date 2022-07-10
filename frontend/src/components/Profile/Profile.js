@@ -1,5 +1,5 @@
 import { Tab, Nav, Row, Col } from "react-bootstrap";
-import "../css/Profile.css";
+import "./Profile.css";
 const Profile = () => {
 	return (
 		<>
@@ -14,7 +14,7 @@ const Profile = () => {
 								<Nav.Item>
 									<Nav.Link eventKey='address'>Address</Nav.Link>
 								</Nav.Item>
-                                <Nav.Item>
+								<Nav.Item>
 									<Nav.Link eventKey='saved-cards'>Saved cards</Nav.Link>
 								</Nav.Item>
 							</Nav>
@@ -22,7 +22,7 @@ const Profile = () => {
 						<Col sm={9}>
 							<Tab.Content>
 								<Tab.Pane eventKey='profile'>
-									<form className="profile-form">
+									<form className='profile-form'>
 										<div className='row'>
 											<label for='name'>Name</label>
 											<div className='form-group col-sm-6'>
@@ -46,20 +46,20 @@ const Profile = () => {
 											</div>
 											<div className='col-2'>
 												<input type='radio' name='gender' value='Male' />
-												<label class='form-check-label' for='gender'>
+												<label className='form-check-label' for='gender'>
 													Male
 												</label>
 											</div>
 											<div className='col-2'>
 												<input type='radio' name='gender' value='Female' />
-												<label class='form-check-label' for='gender'>
+												<label className='form-check-label' for='gender'>
 													Female
 												</label>
 											</div>
 										</div>
-                                        <div className='row'>
+										<div className='row'>
 											<div className='form-group col-sm-6'>
-											    <label for='name'>Email Adrress</label>
+												<label for='name'>Email Adrress</label>
 												<input
 													type='text'
 													className='form-control'
@@ -67,7 +67,7 @@ const Profile = () => {
 												/>
 											</div>
 											<div className='form-group col-sm-6'>
-											    <label for='name'>Mobile Number</label>
+												<label for='name'>Mobile Number</label>
 												<input
 													type='text'
 													className='form-control'
@@ -78,7 +78,7 @@ const Profile = () => {
 									</form>
 								</Tab.Pane>
 								<Tab.Pane eventKey='address'>
-								<form className="profile-form">
+									<form className='profile-form'>
 										<div className='row'>
 											<label for='name'>Name</label>
 											<div className='form-group col-sm-6'>
@@ -102,20 +102,20 @@ const Profile = () => {
 											</div>
 											<div className='col-1'>
 												<input type='radio' name='gender' value='Male' />
-												<label class='form-check-label' for='gender'>
+												<label className='form-check-label' for='gender'>
 													Male
 												</label>
 											</div>
 											<div className='col-2'>
 												<input type='radio' name='gender' value='Female' />
-												<label class='form-check-label' for='gender'>
+												<label className='form-check-label' for='gender'>
 													Female
 												</label>
 											</div>
 										</div>
-                                        <div className='row'>
+										<div className='row'>
 											<div className='form-group col-sm-6'>
-											    <label for='name'>Email Adrress</label>
+												<label for='name'>Email Adrress</label>
 												<input
 													type='text'
 													className='form-control'
@@ -123,7 +123,7 @@ const Profile = () => {
 												/>
 											</div>
 											<div className='form-group col-sm-6'>
-											    <label for='name'>Mobile Number</label>
+												<label for='name'>Mobile Number</label>
 												<input
 													type='text'
 													className='form-control'
@@ -132,11 +132,9 @@ const Profile = () => {
 											</div>
 										</div>
 									</form>
-									<button className="btn btn-warning">Add New Address</button>
-                                </Tab.Pane>
-                                <Tab.Pane eventKey='saved-cards'>
-                                    
-                                </Tab.Pane>
+									<button className='btn btn-warning'>Add New Address</button>
+								</Tab.Pane>
+								<Tab.Pane eventKey='saved-cards'></Tab.Pane>
 							</Tab.Content>
 						</Col>
 					</Row>

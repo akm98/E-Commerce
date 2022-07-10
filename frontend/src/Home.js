@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Carousel, Tabs, Tab } from "react-bootstrap";
-import Product from "./components/Product";
+import Product from "./components/Product/Product";
 import "./css/Home.css";
 const HomePage = () => {
 	const productdata = [1, 2, 3, 4, 5, 6];

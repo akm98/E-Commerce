@@ -1,10 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Cart from "./components/Cart";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
-import Profile from "./components/Profile";
-import Results from "./components/Results";
+import Cart from "./components/Cart/Cart";
+import Footer from "./components/Footer/Footer";
+import Header from "./components/Header/Header";
+import Profile from "./components/Profile/Profile";
+import Results from "./components/Results/Results";
 import HomePage from "./Home";
 
 const BaseContainer = () => {
@@ -52,8 +52,6 @@ const BaseContainer = () => {
 							</>
 						}
 					/>
-					
-					
 				</Routes>
 			</Router>
 		</>
