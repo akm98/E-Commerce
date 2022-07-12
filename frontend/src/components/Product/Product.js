@@ -4,32 +4,38 @@ import "./Product.css";
 import Sample from "../../Assets/sample.jpg";
 import { Link } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
-const Product = ({ i }) => {
+
+const Product = (props) => {
+	const { name, desc, price, numOfReviews, category, ratings, i, id, image } =
+		props;
+
 	return (
 		<>
-			<Link className='product-card' to={"979878979"}>
+			<Link className='product-card' to={`product/${id}`}>
 				<img
 					src={
-						i % 2
-							? Sample
-							: "https://m.media-amazon.com/images/I/41O3A6CUd8L.jpg"
+						image === "sample url"
+							? "https://m.media-amazon.com/images/I/41O3A6CUd8L.jpg"
+							: image
 					}
 				/>
 
-				<p>Red Gear KeyBoard</p>
+				<p>{name && name.length > 25 ? name.slice(0, 23) + "..." : name}</p>
 
 				<div className='product-desc'>
 					<small>
-						Redgear Shadow Blade Mechanical Keyboard with Drive Customization
+						{desc && desc.length > 70 ? desc.slice(0, 67) + "..." : desc}
 					</small>
 				</div>
 				<div className='product-ratings'>
-					{[1, 2, 3, 4, 5].map(() => (
-						<AiFillStar fill='#ffc107' />
-					))}
-					<span>(256) Reviews</span>
+					{ratings
+						? Array(Math.trunc(ratings))
+								.fill()
+								.map(() => <AiFillStar fill='#ffc107' />)
+						: null}
+					<span>({numOfReviews}) Reviews</span>
 				</div>
-				<span>₹2000</span>
+				<span>₹{price}</span>
 			</Link>
 		</>
 	);

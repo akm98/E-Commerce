@@ -3,11 +3,13 @@
   display: flex;
   flex-direction: column;
   text-decoration: none;
-  margin: 2vmax;
+  margin-block: auto;
+  margin-inline: 3vmax;
   padding: 1vmax;
   transition: all 0.5s;
   padding-bottom: 0.5vmax;
   color: black;
+  align-items: center;
 }
 
 .product-card > img {

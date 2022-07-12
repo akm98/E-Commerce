@@ -1,9 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Carousel, Tabs, Tab } from "react-bootstrap";
 import Product from "./components/Product/Product";
+import { getProdcuts } from "./redux/actions/productActions";
+import { useDispatch, useSelector } from "react-redux";
+import { useAlert } from "react-alert";
 import "./css/Home.css";
+import Slider from "react-slick";
+import { NextArrow, PrevArrow } from "./components/sliderArrows/SliderArrows";
+
 const HomePage = () => {
-	const productdata = [1, 2, 3, 4, 5, 6];
+	const alert = useAlert();
+	const dispatch = useDispatch();
+	const { loading, products, error } = useSelector((state) => state.products);
+
+	useEffect(() => {
+		if (error) {
+			return alert.error(error);
+		}
+		dispatch(getProdcuts());
+	}, [dispatch, error]);
+
 	const tabs = [
 		"Health",
 		"Daily Essentials",
@@ -13,57 +29,83 @@ const HomePage = () => {
 		"Electronics",
 		"Grocery",
 	];
-	const tabProductData = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 123];
+	const homeSliderOptions = {
+		dots: true,
+		infinite: true,
+		speed: 500,
+		slidesToShow: 1,
+		slidesToScroll: 1,
+		nextArrow: <NextArrow />,
+		prevArrow: <PrevArrow />,
+	};
+	const productSilderOptions = {
+		dots: false,
+		infinite: true,
+		speed: 500,
+		slidesToShow: 4,
+		slidesToScroll: 1,
+		nextArrow: <NextArrow />,
+		prevArrow: <PrevArrow />,
+		responsive: [
+			{
+				breakpoint: 1024,
+				settings: {
+					slidesToShow: 3,
+					slidesToScroll: 3,
+					infinite: true,
+					dots: true,
+				},
+			},
+			{
+				breakpoint: 600,
+				settings: {
+					slidesToShow: 2,
+					slidesToScroll: 2,
+					initialSlide: 2,
+				},
+			},
+			{
+				breakpoint: 480,
+				settings: {
+					slidesToShow: 1,
+					slidesToScroll: 1,
+				},
+			},
+		],
+	};
+
 	return (
 		<>
 			<div className='container'>
-				<Carousel fade className='carousel '>
-					<Carousel.Item>
-						<img
-							className='d-block w-100 s'
-							src='https://i.imgur.com/X99e6jS.jpg'
-							alt='First slide'
-						/>
-						<Carousel.Caption>
-							<h3>First slide label</h3>
-							<p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-						</Carousel.Caption>
-					</Carousel.Item>
-					<Carousel.Item>
-						<img
-							className='d-block w-100'
-							src='https://i.imgur.com/hMR8nTl.jpg'
-							alt='Second slide'
-						/>
-
-						<Carousel.Caption>
-							<h3>Second slide label</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-						</Carousel.Caption>
-					</Carousel.Item>
-					<Carousel.Item>
-						<img
-							className='d-block w-100'
-							src='https://i.imgur.com/eodVcYw.jpg'
-							alt='Third slide'
-						/>
-
-						<Carousel.Caption>
-							<h3>Third slide label</h3>
-							<p>
-								Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-							</p>
-						</Carousel.Caption>
-					</Carousel.Item>
-				</Carousel>
-
+				<Slider {...homeSliderOptions} className='slider-main'>
+					<div className='image-container'>
+						<img src='https://i.imgur.com/X99e6jS.jpg' alt='First slide' />
+					</div>
+					<div className='image-container'>
+						<img src='https://i.imgur.com/hMR8nTl.jpg' alt='Second slide' />
+					</div>
+					<div className='image-container'>
+						<img src='https://i.imgur.com/eodVcYw.jpg' alt='Third slide' />
+					</div>
+				</Slider>
 				<div className='product-section'>
 					<h5>Featured Products</h5>
-					<div className='product-container d-flex'>
-						{productdata.map((e, i) => (
-							<Product i={i} />
-						))}
-					</div>
+					<Slider className='product-container' {...productSilderOptions}>
+						{products &&
+							products.map((e, i) => (
+								<Product
+									name={e.name}
+									desc={e.desc}
+									price={e.price}
+									numOfReviews={e.numOfReviews}
+									category={e.category}
+									ratings={e.ratings}
+									i={i}
+									id={e._id}
+									image={e.images[0].url}
+								/>
+							))}
+					</Slider>
 				</div>
 				<div className='product-section'>
 					<h5>You May Like</h5>
@@ -73,9 +115,19 @@ const HomePage = () => {
 								return (
 									<Tab className='row' eventKey={tab} title={tab}>
 										<div className='product-filters'>
-											{productdata.map((e) => (
-												<Product />
-											))}
+											{products &&
+												products.map((e) => (
+													<Product
+														name={e.name}
+														desc={e.desc}
+														price={e.price}
+														numOfReviews={e.numOfReviews}
+														category={e.category}
+														ratings={e.ratings}
+														id={e._id}
+														image={e.images[0].url}
+													/>
+												))}
 										</div>
 									</Tab>
 								);

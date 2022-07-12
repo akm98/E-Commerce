@@ -48,11 +48,15 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
 		return next(new ErrorHandler("Product not found", 404));
 	}
 
-	product = await Product.findByIdAndUpdate(req.params.id, req.body, {
-		new: true,
-		runValidators: true,
-		useFindAndModify: false,
-	});
+	product = await Product.findByIdAndUpdate(
+		req.params.id.toString(),
+		req.body,
+		{
+			new: true,
+			runValidators: true,
+			useFindAndModify: false,
+		}
+	);
 
 	res.status(200).json({
 		success: true,

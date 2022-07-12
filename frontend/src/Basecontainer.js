@@ -6,12 +6,26 @@ import Header from "./components/Header/Header";
 import Profile from "./components/Profile/Profile";
 import Results from "./components/Results/Results";
 import HomePage from "./Home";
+import Test from "./Test";
+import ProductDetails from "./components/Product/ProductDetails";
 
 const BaseContainer = () => {
 	return (
 		<>
 			<Router>
 				<Routes>
+					<Route path='/test' element={<Test />} />
+					<Route
+						exact
+						path='/product/:id'
+						element={
+							<>
+								<Header />
+								<ProductDetails />
+								<Footer />
+							</>
+						}
+					/>
 					<Route
 						path='/cart'
 						element={
