@@ -8,6 +8,7 @@ import "./ProductDetails.css";
 import { AiFillStar } from "react-icons/ai";
 import { BiPlusCircle, BiMinusCircle } from "react-icons/bi";
 import { FaCartPlus } from "react-icons/fa";
+import ReviewCard from "./ReviewCard";
 
 const SliderOptions = {
 	dots: true,
@@ -83,8 +84,13 @@ const ProductDetails = () => {
 							Status:<b>{product.stock > 0 ? "In Stock" : "Out of stock"}</b>
 						</p>
 					</div>
+					<button className='add-review'>Add Review</button>
 				</div>
-				<button className='submit-review'>Submit Review</button>
+			</div>
+			<div className='reviews-section'>
+				{[11, 2, 2, 2, 3].map(() => (
+					<ReviewCard />
+				))}
 			</div>
 		</>
 	) : (

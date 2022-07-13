@@ -67,3 +67,28 @@
   width: 8vmax;
   font-size: 1rem;
 }
+.add-review {
+  border-radius: 6px;
+  border: 0;
+  padding: 0.5vmax;
+  background-color: #25619c;
+  color: white;
+}
+.reviews-section {
+  display: flex;
+  overflow: auto;
+}
+.review-card {
+  padding: 3vmax;
+  margin: 1vmax;
+  flex: none;
+  /* border: 1px solid gray; */
+  box-shadow: 0 0 5px gray;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 30vmax;
+}
+.review-card > img {
+  border-radius: 90px;
+}
