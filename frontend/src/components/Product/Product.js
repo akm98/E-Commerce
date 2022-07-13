@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { AiFillStar } from "react-icons/ai";
 
 const Product = (props) => {
-	const { name, desc, price, numOfReviews, category, ratings, i, id, image } =
+	const { name, desc, price, numOfReviews, category, ratings, id, image } =
 		props;
 
 	return (

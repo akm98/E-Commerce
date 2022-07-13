@@ -27,7 +27,6 @@ const ProductDetails = () => {
 	const { loading, product, error } = useSelector(
 		(state) => state.productDetails
 	);
-	console.log("produc   t", product);
 
 	useEffect(() => {
 		dispatch(getSingleProductDetails(match.params.id));

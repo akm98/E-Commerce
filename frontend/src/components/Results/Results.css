@@ -1,13 +1,35 @@
-.flex-container{
-    display: flex;
-    flex-flow: row wrap;
-    margin-block: 2rem;
+.flex-container {
+  display: flex;
+  flex-flow: row wrap;
+  margin-block: 2rem;
 }
-.filter{
-    border: 1px;
-    border-style: solid;
-    border-color: #d6d6d6;
+.filter {
+  border: 1px;
+  border-style: solid;
+  border-color: #d6d6d6;
 }
-.search-results{
-    
+.pagination-box {
+  display: flex;
+  justify-content: center;
+  margin: 6vmax;
 }
+.pagination {
+  transition: all 0.3s;
+}
+.page-item:first-child .page-link {
+  border-radius: 5px 0px 0px 5px !important;
+}
+.page-item:last-child .page-link {
+  border-radius: 0px 5px 5px 0px !important;
+}
+.page-link {
+  padding: 1vmax 1.5vmax !important;
+}
+.page-link:hover {
+  background-color: #f1ca3a !important;
+}
+.page-link-active {
+  background-color: #25619c !important;
+  color: white !important;
+}
+/* #25619c */

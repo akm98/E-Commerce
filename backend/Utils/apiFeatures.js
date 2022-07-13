@@ -6,7 +6,7 @@ class ApiFeatures {
 		this.queryStr = queryStr;
 	}
 
-	search = () => {
+	search() {
 		const keyword = this.queryStr.keyword
 			? {
 					name: {
@@ -15,43 +15,44 @@ class ApiFeatures {
 					},
 			  }
 			: {};
-		
+
 		this.query = this.query.find({ ...keyword });
-		
+
 		return this;
-	};
+	}
 
 	filter() {
-        // Filter by category
-        // First we filter by category then we filter it by price
-        const clonedQueryString = {...this.queryStr};
+		// Filter by category
+		// First we filter by category then we filter it by price
+		const clonedQueryString = { ...this.queryStr };
 
-        const excludeOptions = ['keyword','page','limit']
+		const excludeOptions = ["keyword", "page", "limit"];
 
-        excludeOptions.forEach(key=> delete clonedQueryString[key])
+		excludeOptions.forEach((key) => delete clonedQueryString[key]);
 
-        //this.query = this.query.find(clonedQueryString)  // we are not using regex because category will be predifined
-        
-        // Filter by price
-        let queryString = JSON.stringify(clonedQueryString);
-        
-        queryString = queryString.replace(/\b(gt|lt|gte|lte)\b/g,key=>`$${key}`)
-        this.query = this.query.find(JSON.parse(queryString))
+		//this.query = this.query.find(clonedQueryString)  // we are not using regex because category will be predifined
 
+		// Filter by price
+		let queryString = JSON.stringify(clonedQueryString);
 
-        return this;
-    }
+		queryString = queryString.replace(
+			/\b(gt|lt|gte|lte)\b/g,
+			(key) => `$${key}`
+		);
+		this.query = this.query.find(JSON.parse(queryString));
+
+		return this;
+	}
 
 	pagination(itemPerPage) {
-        const currentPage = this.queryStr.page || 1;
+		const currentPage = this.queryStr.page || 1;
 
-        const skip = itemPerPage * (currentPage-1); // items to be skipped
+		const skip = itemPerPage * (currentPage - 1); // items to be skipped
 
-        this.query = this.query.limit(itemPerPage).skip(skip); 
+		this.query = this.query.limit(itemPerPage).skip(skip);
 
-        return this;
-
-    }
+		return this;
+	}
 }
 
 module.exports = ApiFeatures;

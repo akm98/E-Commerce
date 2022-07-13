@@ -57,7 +57,7 @@ const BaseContainer = () => {
 						}
 					/>
 					<Route
-						path='/results'
+						path='/results/:keyword'
 						element={
 							<>
 								<Header />

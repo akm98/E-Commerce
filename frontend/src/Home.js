@@ -100,7 +100,6 @@ const HomePage = () => {
 									numOfReviews={e.numOfReviews}
 									category={e.category}
 									ratings={e.ratings}
-									i={i}
 									id={e._id}
 									image={e.images[0].url}
 								/>

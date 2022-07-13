@@ -3,7 +3,7 @@ const ErrorHandler = require("../Utils/errorHandler");
 const ApiFeatures = require("../Utils/apiFeatures");
 const catchAsyncErrors = require("../Middleware/catchAsyncErrors");
 //create product
-const ITEM_PER_PAGE = 10;
+const ITEM_PER_PAGE = 2;
 
 exports.createProduct = catchAsyncErrors(async (req, res, next) => {
 	req.body.createdBy = req.user.id;
@@ -16,16 +16,23 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
 
 exports.getAllProduct = catchAsyncErrors(async (req, res, next) => {
 	const itemPerPage = ITEM_PER_PAGE;
-	const features = new ApiFeatures(Product.find(), req.query)
-		.search()
-		.filter()
-		.pagination(itemPerPage);
 
-	const products = await features.query;
+	const features = new ApiFeatures(Product.find(), req.query).search().filter();
+
+	let products = await features.query;
+
+	const filteredProductsCount = products.length;
+	features.pagination(itemPerPage);
+
+	products = await features.query.clone();
+
+	// const productsCount = await Product.length;
 
 	res.status(200).json({
 		success: true,
 		products,
+		filteredProductsCount,
+		resultsPerPage: itemPerPage,
 	});
 });
 

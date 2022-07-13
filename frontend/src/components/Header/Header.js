@@ -11,6 +11,17 @@ import { Typeahead } from "react-bootstrap-typeahead";
 const suggestions = ["Akm", "okok", "test", "hmmm"];
 
 const Header = () => {
+	const [keyword, setKeyword] = useState("");
+
+	const handleInput = (value) => {
+		setKeyword(value);
+	};
+
+	const searchKeyword = () => {
+		if (keyword.trim()) {
+		}
+	};
+
 	return (
 		<>
 			<input type='checkbox' id='check' />
@@ -19,8 +30,13 @@ const Header = () => {
 					<Link to='/'>Akm Store</Link>
 				</div>
 				<div className='search-box'>
-					<input type='text' placeholder='Search for products...' />
-					<span>
+					<input
+						type='text'
+						placeholder='Search for products...'
+						value={keyword}
+						onChange={(e) => handleInput(e.target.value)}
+					/>
+					<span onClick={() => searchKeyword()}>
 						Search <FiSearch />
 					</span>
 				</div>
@@ -32,7 +48,7 @@ const Header = () => {
 						<Link to='/profile'>Profile</Link>
 					</li>
 				</ol>
-				<label for='check' className='bar'>
+				<label htmlFor='check' className='bar'>
 					<span id='bars'>
 						<AiOutlineBars />
 					</span>
