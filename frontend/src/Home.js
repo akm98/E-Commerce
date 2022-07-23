@@ -7,6 +7,7 @@ import { useAlert } from "react-alert";
 import "./css/Home.css";
 import Slider from "react-slick";
 import { NextArrow, PrevArrow } from "./components/sliderArrows/SliderArrows";
+import MetaData from "./components/Header/MetaData";
 
 const HomePage = () => {
 	const alert = useAlert();
@@ -76,6 +77,7 @@ const HomePage = () => {
 
 	return (
 		<>
+			<MetaData title='AKM STORE' />
 			<div className='container'>
 				<Slider {...homeSliderOptions} className='slider-main'>
 					<div className='image-container'>

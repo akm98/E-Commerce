@@ -6,9 +6,23 @@ import { getProdcuts } from "../../redux/actions/productActions";
 import { useAlert } from "react-alert";
 import { useMatch } from "react-router-dom";
 import Pagination from "react-js-pagination";
+import { Slider } from "@mui/material";
+import MetaData from "../Header/MetaData";
+
+const categories = [
+	"Health",
+	"Daily Essentials",
+	"Accessories",
+	"Fashion",
+	"Toys",
+	"Electronics",
+	"Test",
+];
 
 const Results = () => {
 	const [currentPage, setCurrentPage] = useState(1);
+	const [category, setCategory] = useState("");
+	const [price, setPrice] = useState([0, 25000]);
 
 	const match = useMatch("/results/:keyword");
 	const dispatch = useDispatch();
@@ -26,15 +40,20 @@ const Results = () => {
 		if (error) {
 			return alert.error(error);
 		}
-		dispatch(getProdcuts(match.params.keyword, currentPage));
-	}, [dispatch, error, currentPage]);
+		dispatch(getProdcuts(match.params.keyword, currentPage, price, category));
+	}, [dispatch, error, currentPage, price, category]);
 
 	const handlePageChange = (e) => {
 		setCurrentPage(e);
 	};
 
+	const handlePriceChange = (e, newPrice) => {
+		setPrice(newPrice);
+	};
+
 	return (
 		<>
+			<MetaData title='Products Results' />
 			<div className='product-filters'>
 				{products &&
 					products.map((e) => (
@@ -50,6 +69,31 @@ const Results = () => {
 						/>
 					))}
 			</div>
+
+			<div className='filter-box'>
+				<p>Price</p>
+				<Slider
+					value={price}
+					onChange={handlePriceChange}
+					valueLabelDisplay='auto'
+					aria-labelledby='range-slider'
+					min={0}
+					max={10000}
+				/>
+				<p>Categories</p>
+				<ul className='category-box'>
+					{categories.map((category) => (
+						<li
+							className='category-link'
+							key={category}
+							onClick={() => setCategory(category)}
+						>
+							{category}
+						</li>
+					))}
+				</ul>
+			</div>
+
 			{filteredProductsCount > resultsPerPage && (
 				<div className='pagination-box'>
 					<Pagination

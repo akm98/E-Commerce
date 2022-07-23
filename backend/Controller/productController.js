@@ -3,7 +3,7 @@ const ErrorHandler = require("../Utils/errorHandler");
 const ApiFeatures = require("../Utils/apiFeatures");
 const catchAsyncErrors = require("../Middleware/catchAsyncErrors");
 //create product
-const ITEM_PER_PAGE = 2;
+const ITEM_PER_PAGE = 9;
 
 exports.createProduct = catchAsyncErrors(async (req, res, next) => {
 	req.body.createdBy = req.user.id;

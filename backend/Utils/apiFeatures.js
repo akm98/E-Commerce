@@ -14,7 +14,7 @@ class ApiFeatures {
 						$options: "i", // lowercase
 					},
 			  }
-			: {};
+			: "";
 
 		this.query = this.query.find({ ...keyword });
 

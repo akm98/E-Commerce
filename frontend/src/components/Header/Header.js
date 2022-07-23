@@ -5,20 +5,24 @@ import "./Header.css";
 import { FiSearch } from "react-icons/fi";
 import { AiOutlineBars } from "react-icons/ai";
 import { FaTimes } from "react-icons/fa";
-
+import { useNavigate } from "react-router-dom";
 import { Typeahead } from "react-bootstrap-typeahead";
+import { useSelector } from "react-redux";
 
 const suggestions = ["Akm", "okok", "test", "hmmm"];
 
 const Header = () => {
 	const [keyword, setKeyword] = useState("");
 
+	const { isAuthenticated, user } = useSelector((state) => state.user);
+	const navigate = useNavigate();
 	const handleInput = (value) => {
 		setKeyword(value);
 	};
 
 	const searchKeyword = () => {
 		if (keyword.trim()) {
+			navigate(`/results/${keyword}`);
 		}
 	};
 
@@ -41,12 +45,11 @@ const Header = () => {
 					</span>
 				</div>
 				<ol>
-					<li>
-						<Link to='/cart'>Cart</Link>
-					</li>
-					<li>
-						<Link to='/profile'>Profile</Link>
-					</li>
+					{!isAuthenticated && (
+						<li>
+							<Link to='/login'>Login</Link>
+						</li>
+					)}
 				</ol>
 				<label htmlFor='check' className='bar'>
 					<span id='bars'>

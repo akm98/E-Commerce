@@ -1,7 +1,9 @@
-.flex-container {
+.product-filters {
   display: flex;
   flex-flow: row wrap;
   margin-block: 2rem;
+  padding-inline-start: 11vmax;
+  min-height: 70vh;
 }
 .filter {
   border: 1px;
@@ -33,3 +35,23 @@
   color: white !important;
 }
 /* #25619c */
+.filter-box {
+  width: 10vmax;
+  position: absolute;
+  top: 8vmax;
+  left: 4vmax;
+}
+.category-box {
+  padding: 0%;
+}
+.category-link {
+  list-style: none;
+  font-size: 0.8vmax;
+  color: rgba(0, 0, 0, 0.68);
+  margin: 0.4vmax;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+.category-link:hover {
+  color: tomato;
+}

@@ -1,0 +1,89 @@
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.login-form {
+  box-shadow: 0 0 5px gray;
+  padding: 2vmax;
+  margin: 2vmax;
+}
+.login-container input {
+  height: 3vmax;
+  width: 20vmax;
+  padding-inline: 2.5vmax;
+  position: relative;
+}
+.login-container svg {
+  position: relative;
+  left: 26px;
+  z-index: 1;
+}
+.tab-content {
+  display: flex;
+  margin: auto;
+  justify-content: center;
+}
+.nav-tabs {
+  justify-content: space-around;
+  align-items: center;
+  border: 0px !important;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+form > div {
+  padding: 1vmax;
+  margin: auto;
+}
+.upload-avatar {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+}
+.upload-avatar > img {
+  position: relative;
+  max-width: 4vmax;
+
+  border-radius: 626px;
+  left: 4vmax;
+}
+.upload-avatar > input {
+  left: 4vmax;
+}
+.upload-avatar > input::file-selector-button {
+  height: 7vh;
+  border: none;
+  margin: 0;
+  padding: 0 1vmax;
+  color: white;
+  background-color: darkslateblue;
+}
+.btn-login {
+  margin-block-start: 1vmax;
+  background-color: #25619c;
+  border: 0px;
+  color: white;
+  margin-inline: auto;
+}
+.forgot-password {
+  color: blue !important;
+  margin: auto;
+  font-size: 12px;
+}
+
+@media screen and (max-width: 1000px) {
+  .login-container input {
+    height: 5vmax;
+    padding-inline: 3.5vmax;
+    width: 30vmax;
+  }
+  .upload-avatar > img {
+    position: relative;
+    max-width: 4vmax;
+    left: 6vmax;
+  }
+}

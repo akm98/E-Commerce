@@ -10,14 +10,16 @@ import {
 } from "../constants/productConstants";
 
 export const getProdcuts =
-	(keyword = "", page = 1, category, price, ratings) =>
+	(keyword = "", page = 1, price = [0, 25000], category, ratings) =>
 	async (dispatch) => {
 		console.log("keyw,", keyword);
 		try {
 			dispatch({ type: ALL_PRODUCT_REQUEST });
-			const { data } = await axios.get(
-				`/api/products?keyword=${keyword}&page=${page}`
-			);
+			let link = `/api/products?keyword=${keyword}&page=${page}&price[gte]=${price[0]}&price[lte]=${price[1]}`;
+			if (category) {
+				link = `/api/products?keyword=${keyword}&page=${page}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}`;
+			}
+			const { data } = await axios.get(link);
 			dispatch({
 				type: ALL_PRODUCT_SUCCESS,
 				payload: data,
