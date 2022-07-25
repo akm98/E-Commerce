@@ -1,5 +1,5 @@
 import { BsArrowLeft } from "react-icons/bs";
-
+import React from "react";
 export const NextArrow = (props) => {
 	const { className, style, onClick } = props;
 	return (

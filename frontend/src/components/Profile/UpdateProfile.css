@@ -1,36 +1,34 @@
-.login-container {
+.update-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.login-form {
+.update-form {
   box-shadow: 0 0 5px gray;
   padding: 2vmax;
   margin: 2vmax;
 }
-.login-container input {
+.update-form > h3 {
+  color: grey;
+  text-align: center;
+  border-bottom: 1px solid grey;
+  margin-inline: 6vmax;
+  padding: 1vmax;
+}
+.update-container input {
   height: 3vmax;
   width: 20vmax;
   padding-inline: 2.5vmax;
   position: relative;
   cursor: text;
 }
-.login-container svg {
+.update-container svg {
   position: relative;
   left: 26px;
   z-index: 1;
 }
-.tab-content {
-  display: flex;
-  margin: auto;
-  justify-content: center;
-}
-.nav-tabs {
-  justify-content: space-around;
-  align-items: center;
-  border: 0px !important;
-}
+
 form {
   display: flex;
   flex-direction: column;
@@ -63,28 +61,38 @@ form > div {
   color: white;
   background-color: darkslateblue;
 }
-.btn-login {
+.btn-update {
   margin-block-start: 1vmax;
   background-color: #25619c;
   border: 0px;
   color: white;
   margin-inline: auto;
 }
-.forgot-password {
-  color: blue !important;
-  margin: auto;
-  font-size: 12px;
-}
-
 @media screen and (max-width: 1000px) {
-  .login-container input {
-    height: 5vmax;
-    padding-inline: 3.5vmax;
-    width: 30vmax;
+  .update-form input {
+    height: 8vh;
+    padding: 0vmax 5vmax;
+    margin: 0;
+    width: 90%;
+    align-items: center;
   }
-  .upload-avatar > img {
+
+  form > div {
+    margin: 0;
+    padding-inline-start: 1vmax;
+  }
+  .upload-avatar img {
     position: relative;
-    max-width: 4vmax;
+    max-width: 8vmax;
     left: 6vmax;
+  }
+  .upload-avatar {
+    align-items: center;
+  }
+  .upload-avatar input {
+    height: 10vh;
+  }
+  .btn-update {
+    width: 100% !important;
   }
 }

@@ -111,7 +111,7 @@ input[type="checkbox"] {
 .speed-dail-icon {
   width: 56px;
   height: 56px;
-  border-radius: "100%";
+  border-radius: 100%;
 }
 @media screen and (max-width: 1250px) {
   nav {

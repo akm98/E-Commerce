@@ -8,8 +8,8 @@ const cloudinary = require("cloudinary");
 
 exports.registerUser = catchAsyncErrors(async (req, res, next) => {
 	let myCloud = {
-		public_id: "default",
-		secure_url: "default",
+		public_id: "sample ID",
+		secure_url: "sample url",
 	};
 	if (req.body.avatar) {
 		myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
@@ -192,6 +192,24 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
 		email: req.body.email,
 	};
 
+	if (req.body.avatar) {
+		const user = await User.findById(req.user.id);
+
+		if (user.avatar.public_id !== "sample ID") {
+			const imageID = user.avatar.public_id;
+			await cloudinary.v2.uploader.destroy(imageID);
+			console.log("removed");
+		}
+		const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+			folder: "avatars",
+			width: 150,
+			crop: "scale",
+		});
+		newUserData.avatar = {
+			public_id: myCloud.public_id,
+			url: myCloud.secure_url,
+		};
+	}
 	const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
 		new: true,
 		runValidators: true,

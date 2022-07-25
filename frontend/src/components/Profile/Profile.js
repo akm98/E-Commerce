@@ -1,144 +1,57 @@
-import { Tab, Nav, Row, Col } from "react-bootstrap";
+import React, { useEffect, useState } from "react";
 import "./Profile.css";
+import Loader from "../Loader/Loader";
+import MetaData from "../Header/MetaData";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import ProfileImg from "../../Assets/profile.png";
+
 const Profile = () => {
-	return (
+	const { user, loading, isAuthenticated } = useSelector((state) => state.user);
+
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (user && isAuthenticated !== undefined && !isAuthenticated) {
+			navigate("/login");
+		}
+	}, [isAuthenticated, user]);
+
+	return loading || Object.keys(user).length === 0 ? (
+		<Loader />
+	) : (
 		<>
-			<div className='container tabs-container'>
-				<Tab.Container id='left-tabs-example' defaultActiveKey='profile'>
-					<Row>
-						<Col sm={3}>
-							<Nav variant='tabs' className='flex-column'>
-								<Nav.Item>
-									<Nav.Link eventKey='profile'>Profile Information</Nav.Link>
-								</Nav.Item>
-								<Nav.Item>
-									<Nav.Link eventKey='address'>Address</Nav.Link>
-								</Nav.Item>
-								<Nav.Item>
-									<Nav.Link eventKey='saved-cards'>Saved cards</Nav.Link>
-								</Nav.Item>
-							</Nav>
-						</Col>
-						<Col sm={9}>
-							<Tab.Content>
-								<Tab.Pane eventKey='profile'>
-									<form className='profile-form'>
-										<div className='row'>
-											<label for='name'>Name</label>
-											<div className='form-group col-sm-6'>
-												<input
-													type='text'
-													className='form-control'
-													placeholder='First name'
-												/>
-											</div>
-											<div className='form-group col-sm-6'>
-												<input
-													type='text'
-													className='form-control'
-													placeholder='Last name'
-												/>
-											</div>
-										</div>
-										<div className='row'>
-											<div className='col-2'>
-												<label>Gender</label>
-											</div>
-											<div className='col-2'>
-												<input type='radio' name='gender' value='Male' />
-												<label className='form-check-label' for='gender'>
-													Male
-												</label>
-											</div>
-											<div className='col-2'>
-												<input type='radio' name='gender' value='Female' />
-												<label className='form-check-label' for='gender'>
-													Female
-												</label>
-											</div>
-										</div>
-										<div className='row'>
-											<div className='form-group col-sm-6'>
-												<label for='name'>Email Adrress</label>
-												<input
-													type='text'
-													className='form-control'
-													placeholder='Email'
-												/>
-											</div>
-											<div className='form-group col-sm-6'>
-												<label for='name'>Mobile Number</label>
-												<input
-													type='text'
-													className='form-control'
-													placeholder='Mobile'
-												/>
-											</div>
-										</div>
-									</form>
-								</Tab.Pane>
-								<Tab.Pane eventKey='address'>
-									<form className='profile-form'>
-										<div className='row'>
-											<label for='name'>Name</label>
-											<div className='form-group col-sm-6'>
-												<input
-													type='text'
-													className='form-control'
-													placeholder='First name'
-												/>
-											</div>
-											<div className='form-group col-sm-6'>
-												<input
-													type='text'
-													className='form-control'
-													placeholder='Last name'
-												/>
-											</div>
-										</div>
-										<div className='row'>
-											<div className='col-1'>
-												<label>Gender</label>
-											</div>
-											<div className='col-1'>
-												<input type='radio' name='gender' value='Male' />
-												<label className='form-check-label' for='gender'>
-													Male
-												</label>
-											</div>
-											<div className='col-2'>
-												<input type='radio' name='gender' value='Female' />
-												<label className='form-check-label' for='gender'>
-													Female
-												</label>
-											</div>
-										</div>
-										<div className='row'>
-											<div className='form-group col-sm-6'>
-												<label for='name'>Email Adrress</label>
-												<input
-													type='text'
-													className='form-control'
-													placeholder='Email'
-												/>
-											</div>
-											<div className='form-group col-sm-6'>
-												<label for='name'>Mobile Number</label>
-												<input
-													type='text'
-													className='form-control'
-													placeholder='Mobile'
-												/>
-											</div>
-										</div>
-									</form>
-									<button className='btn btn-warning'>Add New Address</button>
-								</Tab.Pane>
-								<Tab.Pane eventKey='saved-cards'></Tab.Pane>
-							</Tab.Content>
-						</Col>
-					</Row>
-				</Tab.Container>
+			<MetaData title={`Welcome ${user.name}`} />
+			<div className='profile-container'>
+				<div>
+					<h1>My Profile</h1>
+					<img
+						src={
+							user.avatar.url === "sample url" ? ProfileImg : user.avatar.url
+						}
+						alt={user.name}
+					/>
+					<Link to='/profile/update'>Edit Profile</Link>
+				</div>
+				<div>
+					<div>
+						<h4>Full Name</h4>
+						<p>{user.name}</p>
+					</div>
+					<div>
+						<h4>Email</h4>
+						<p>{user.email}</p>
+					</div>
+					<div>
+						<h4>Joined On</h4>
+						<p>{String(user.createdAt).slice(0, 10)}</p>
+					</div>
+
+					<div>
+						<Link to='/orders'>My Orders</Link>
+						<Link to='/password/update'>Change Password</Link>
+					</div>
+				</div>
 			</div>
 		</>
 	);

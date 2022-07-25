@@ -13,6 +13,10 @@ import LoginSignUp from "./components/LoginSignUp/LoginSignUp";
 import store from "./redux/store";
 import { loadUser } from "./redux/actions/userActions";
 import { useSelector } from "react-redux";
+import UpdateProfile from "./components/Profile/UpdateProfile";
+import UpdatePassword from "./components/Profile/UpdatePassword";
+import ForgotPassword from "./components/LoginSignUp/ForgotPassword";
+
 const BaseContainer = () => {
 	const { isAuthenticated, user } = useSelector((state) => state.user);
 	useEffect(() => {
@@ -23,7 +27,7 @@ const BaseContainer = () => {
 		<>
 			<Router>
 				<Header />
-				{isAuthenticated && <UserOptions user={user.user} />}
+				{isAuthenticated && <UserOptions user={user} />}
 				<Routes>
 					<Route path='/test' element={<Test />} />
 					<Route exact path='/product/:id' element={<ProductDetails />} />
@@ -32,6 +36,9 @@ const BaseContainer = () => {
 					<Route path='/' element={<HomePage />} />
 					<Route path='/results/:keyword' element={<Results />} />
 					<Route path='/login' element={<LoginSignUp />} />
+					<Route path='/profile/update' element={<UpdateProfile />} />
+					<Route path='/password/update' element={<UpdatePassword />} />
+					<Route path='/password/forgot' element={<ForgotPassword />} />
 				</Routes>
 				<Footer />
 			</Router>

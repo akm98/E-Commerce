@@ -8,6 +8,7 @@ import "./css/Home.css";
 import Slider from "react-slick";
 import { NextArrow, PrevArrow } from "./components/sliderArrows/SliderArrows";
 import MetaData from "./components/Header/MetaData";
+import Loader from "./components/Loader/Loader";
 
 const HomePage = () => {
 	const alert = useAlert();
@@ -18,6 +19,7 @@ const HomePage = () => {
 		if (error) {
 			return alert.error(error);
 		}
+
 		dispatch(getProdcuts());
 	}, [dispatch, error]);
 
@@ -75,7 +77,9 @@ const HomePage = () => {
 		],
 	};
 
-	return (
+	return loading ? (
+		<Loader />
+	) : (
 		<>
 			<MetaData title='AKM STORE' />
 			<div className='container'>

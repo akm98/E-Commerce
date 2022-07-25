@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { SpeedDial, SpeedDialAction } from "@material-ui/lab";
+import SpeedDial from "@mui/material/SpeedDial";
+import SpeedDialAction from "@mui/material/SpeedDialAction";
 import Profile from "../../Assets/profile.png";
 import { MdDashboard } from "react-icons/md";
 import { TbLogout } from "react-icons/tb";
@@ -9,6 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { useAlert } from "react-alert";
 import { userLogout, clearErrors } from "../../redux/actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
+import { Backdrop } from "@mui/material";
 import "./Header.css";
 
 const UserOptions = ({ user }) => {
@@ -24,7 +26,7 @@ const UserOptions = ({ user }) => {
 			alert.error(error);
 			dispatch(clearErrors());
 		}
-	}, [dispatch, error]);
+	}, [dispatch, error, user]);
 
 	const logout = () => {
 		dispatch(userLogout());
@@ -36,7 +38,6 @@ const UserOptions = ({ user }) => {
 
 	const orders = () => {
 		navigate("/cart");
-		console.log("orders");
 	};
 
 	const profile = () => {
@@ -61,6 +62,7 @@ const UserOptions = ({ user }) => {
 
 	return (
 		<>
+			<Backdrop open={open} style={{ zIndex: 2 }} />
 			<SpeedDial
 				ariaLabel='SpeedDial tooltip example'
 				onClose={() => setOpen(false)}
@@ -73,7 +75,7 @@ const UserOptions = ({ user }) => {
 						className='speed-dail-icon'
 						src={
 							user.avatar && user.avatar.url !== "sample url"
-								? user.avatar
+								? user.avatar.url
 								: Profile
 						}
 						alt='Profile'

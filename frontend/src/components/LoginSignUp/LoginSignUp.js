@@ -1,6 +1,5 @@
-import { Tab, Tabs } from "react-bootstrap";
-
 import React, { useEffect } from "react";
+import { Tab, Tabs } from "react-bootstrap";
 import "./LoginSignUp.css";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { HiOutlineMail, HiLockClosed, HiUserCircle } from "react-icons/hi";
@@ -22,7 +21,7 @@ function LoginSignUp() {
 	const [avatarPreview, setAvatarPreview] = useState(Profile);
 
 	const dispatch = useDispatch();
-	const { state, loading, error, isAuthenticated } = useSelector(
+	const { loading, error, isAuthenticated } = useSelector(
 		(state) => state.user
 	);
 	const alert = useAlert();
@@ -36,7 +35,6 @@ function LoginSignUp() {
 			alert.error(error);
 			dispatch(clearErrors());
 		}
-		console.log("User logged", error);
 	}, [dispatch, error, isAuthenticated]);
 
 	const handleLogin = (e) => {
@@ -54,7 +52,6 @@ function LoginSignUp() {
 		regform.set("password", user.password);
 		if (avatar) regform.set("avatar", avatar);
 
-		console.log("formData", regform, avatar);
 		dispatch(register(regform));
 	};
 
@@ -112,7 +109,7 @@ function LoginSignUp() {
 										onChange={loginDataChange}
 									/>
 								</div>
-								<Link to='/forgetPassword' className='forgot-password'>
+								<Link to='/password/forgot' className='forgot-password'>
 									Forgot Password?
 								</Link>
 								<input type='submit' className='btn-login' value='Login' />
