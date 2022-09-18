@@ -1,0 +1,43 @@
+.order-success {
+  margin: auto;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10vmax;
+}
+.order-success > svg {
+  font-size: 7vmax;
+  color: #4caf50;
+}
+.order-success > h3 {
+  font-size: 2vmax;
+}
+.order-success > a {
+  background-color: #25619c;
+  color: white;
+  padding: 1vmax 3vmax;
+  cursor: pointer;
+  text-decoration: none;
+  margin: 2vmax;
+  border: none;
+}
+.order-success > a:hover {
+  color: white;
+}
+
+@media screen and (max-width: 600px) {
+  .order-success > svg {
+    font-size: 20vmax;
+  }
+  .order-success > h3 {
+    font-size: 5vw;
+    margin: 2vmax;
+  }
+  .order-success > a {
+    padding: 3vw 6vw;
+    font-size: 4vw;
+  }
+}

@@ -51,22 +51,6 @@ const UpdatePassword = () => {
 		dispatch(updatePassword(regform));
 	};
 
-	const updateDataChange = (e) => {
-		switch (e.target.name) {
-			case "oldPassword":
-				setOldPassword(e.target.value);
-				return;
-			case "newPassword":
-				setNewPassword(e.target.value);
-				return;
-			case "confirmPassword":
-				setConfirmPassword(e.target.value);
-				return;
-			default:
-				return;
-		}
-	};
-
 	return (
 		<div className='update-container'>
 			<div className='update-form'>
@@ -79,7 +63,7 @@ const UpdatePassword = () => {
 							placeholder='Old Password'
 							name='oldPassword'
 							value={oldPassword}
-							onChange={updateDataChange}
+							onChange={(e) => setOldPassword(e.target.value)}
 						/>
 					</div>
 					<div className='new-password'>
@@ -89,7 +73,7 @@ const UpdatePassword = () => {
 							placeholder='New Password'
 							name='newPassword'
 							value={newPassword}
-							onChange={updateDataChange}
+							onChange={(e) => setNewPassword(e.target.value)}
 						/>
 					</div>
 					<div className='confirm-password'>
@@ -99,7 +83,7 @@ const UpdatePassword = () => {
 							placeholder='Confirm Password'
 							name='confirmPassword'
 							value={confirmPassword}
-							onChange={updateDataChange}
+							onChange={(e) => setConfirmPassword(e.target.value)}
 						/>
 					</div>
 

@@ -1,7 +1,7 @@
 * {
   box-sizing: border-box;
 }
-a {
+nav a {
   color: #000 !important;
 }
 
@@ -99,10 +99,7 @@ nav .bar span {
   color: rgb(31, 91, 242);
   font-size: 35px;
 }
-input[type="checkbox"] {
-  -webkit-appearance: none;
-  display: none;
-}
+
 .speed-dial {
   position: fixed;
   top: 0.2vmax;
@@ -149,35 +146,12 @@ input[type="checkbox"] {
     padding: 25px;
     display: block;
   }
-  nav ol li:nth-child(1) {
-    transform: translateX(-150px);
-  }
-  nav ol li:nth-child(2) {
-    transform: translateX(-200px);
-  }
+
   nav .bar {
     display: block;
     position: absolute;
     top: 3px;
     left: 20px;
     cursor: pointer;
-  }
-  nav .bar #times {
-    display: none;
-  }
-  #check:checked ~ nav .bar #times {
-    display: block;
-  }
-  #check:checked ~ nav .bar #bars {
-    display: none;
-  }
-  #check:checked ~ nav ol {
-    visibility: visible;
-    height: 150px;
-  }
-  #check:checked ~ nav ol li:nth-child(1),
-  #check:checked ~ nav ol li:nth-child(2) {
-    transform: translateX(0);
-    opacity: 1;
   }
 }

@@ -87,6 +87,7 @@ const UserOptions = ({ user }) => {
 						icon={each.icon}
 						tooltipTitle={each.name}
 						onClick={each.func}
+						tooltipOpen={window.innerWidth <= 600 ? true : false}
 					/>
 				))}
 			</SpeedDial>

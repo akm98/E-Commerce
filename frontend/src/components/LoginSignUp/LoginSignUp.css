@@ -31,12 +31,12 @@
   align-items: center;
   border: 0px !important;
 }
-form {
+.login-container form {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-form > div {
+.login-container form > div {
   padding: 1vmax;
   margin: auto;
 }

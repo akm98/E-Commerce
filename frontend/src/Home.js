@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Carousel, Tabs, Tab } from "react-bootstrap";
 import Product from "./components/Product/Product";
-import { getProdcuts } from "./redux/actions/productActions";
+import { getProducts } from "./redux/actions/productActions";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
 import "./css/Home.css";
@@ -20,7 +20,7 @@ const HomePage = () => {
 			return alert.error(error);
 		}
 
-		dispatch(getProdcuts());
+		dispatch(getProducts());
 	}, [dispatch, error]);
 
 	const tabs = [

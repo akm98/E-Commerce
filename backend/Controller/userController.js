@@ -183,7 +183,9 @@ exports.updatePassowrd = catchAsyncErrors(async (req, res, next) => {
 	user.password = newPassword;
 	await user.save();
 
-	sendToken(user, 200, res);
+	res.status(200).json({
+		success: true,
+	});
 });
 
 exports.updateProfile = catchAsyncErrors(async (req, res, next) => {

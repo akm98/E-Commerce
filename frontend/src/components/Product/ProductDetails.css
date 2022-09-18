@@ -30,12 +30,16 @@
   margin-bottom: 1vmax;
   margin-top: 0.5vmax;
 }
-.quantity > span {
-  font-size: 1.75vmax;
+
+.quantity > button {
+  background-color: transparent;
+  border: 0;
+  font-size: 1.5vmax;
 }
 .quantity > input {
   margin: 0.5vmax;
-  width: 3vmax;
+  width: 5vmax;
+  text-align: center;
   padding-inline: 1vmax;
 }
 .cart-options {
@@ -91,4 +95,20 @@
 }
 .review-card > img {
   border-radius: 90px;
+}
+.submit-dailog {
+  display: flex;
+  flex-direction: column;
+}
+.submit-stars {
+  font-size: 2vmax;
+}
+.MuiDialogTitle-root {
+}
+.submit-dailog-textarea {
+  border: 1px solid grey;
+  border-radius: 5px;
+  margin: 1vmax 0;
+  outline: none;
+  padding: 1rem;
 }

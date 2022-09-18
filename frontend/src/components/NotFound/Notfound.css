@@ -1,0 +1,43 @@
+.not-found {
+  margin: auto;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10vmax;
+}
+.not-found > svg {
+  font-size: 7vmax;
+  color: #f57c00;
+}
+.not-found > h3 {
+  font-size: 2vmax;
+}
+.not-found > a {
+  background-color: #25619c;
+  color: white;
+  padding: 1vmax 3vmax;
+  cursor: pointer;
+  text-decoration: none;
+  margin: 2vmax;
+  border: none;
+}
+.not-found > a:hover {
+  color: white;
+}
+
+@media screen and (max-width: 600px) {
+  .not-found > svg {
+    font-size: 20vmax;
+  }
+  .not-found > h3 {
+    font-size: 5vw;
+    margin: 2vmax;
+  }
+  .not-found > a {
+    padding: 3vw 6vw;
+    font-size: 4vw;
+  }
+}

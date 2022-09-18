@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Product from "../Product/Product";
 import "./Results.css";
 import { useDispatch, useSelector } from "react-redux";
-import { getProdcuts } from "../../redux/actions/productActions";
+import { getProducts } from "../../redux/actions/productActions";
 import { useAlert } from "react-alert";
 import { useMatch } from "react-router-dom";
 import Pagination from "react-js-pagination";
@@ -40,8 +40,8 @@ const Results = () => {
 		if (error) {
 			return alert.error(error);
 		}
-		dispatch(getProdcuts(match.params.keyword, currentPage, price, category));
-	}, [dispatch, error, currentPage, price, category]);
+		dispatch(getProducts(match.params.keyword, currentPage, price, category));
+	}, [dispatch, error, currentPage, price, category, match]);
 
 	const handlePageChange = (e) => {
 		setCurrentPage(e);

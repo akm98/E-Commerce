@@ -1,0 +1,15 @@
+.MuiStepConnector-line {
+  display: none !important;
+}
+
+.MuiStepConnector-root {
+  height: 2px;
+  background-color: rgba(0, 0, 0, 0.349);
+}
+
+.Mui-completed {
+  font-weight: 700 !important;
+}
+.step-container {
+  margin-top: 1.5vmax;
+}

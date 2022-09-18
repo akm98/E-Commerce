@@ -28,7 +28,6 @@ const Header = () => {
 
 	return (
 		<>
-			<input type='checkbox' id='check' />
 			<nav>
 				<div className='icon'>
 					<Link to='/'>Akm Store</Link>
@@ -51,14 +50,6 @@ const Header = () => {
 						</li>
 					)}
 				</ol>
-				<label htmlFor='check' className='bar'>
-					<span id='bars'>
-						<AiOutlineBars />
-					</span>
-					<span id='times'>
-						<FaTimes />
-					</span>
-				</label>
 			</nav>
 		</>
 	);

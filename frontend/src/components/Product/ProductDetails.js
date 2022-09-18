@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getSingleProductDetails } from "../../redux/actions/productActions";
+import {
+	getSingleProductDetails,
+	newReview,
+	clearErrors,
+} from "../../redux/actions/productActions";
+import { addItemsToCart } from "../../redux/actions/cartActions";
 import { useMatch } from "react-router-dom";
 import Slider from "react-slick";
 import { NextArrow, PrevArrow } from "../sliderArrows/SliderArrows";
@@ -9,6 +14,18 @@ import { AiFillStar } from "react-icons/ai";
 import { BiPlusCircle, BiMinusCircle } from "react-icons/bi";
 import { FaCartPlus } from "react-icons/fa";
 import ReviewCard from "./ReviewCard";
+import { useAlert } from "react-alert";
+import {
+	Dialog,
+	DialogActions,
+	DialogContent,
+	DialogTitle,
+	Button,
+} from "@mui/material";
+import {
+	NEW_REVIEW_REQUEST,
+	NEW_REVIEW_SUCCESS,
+} from "../../redux/constants/productConstants";
 
 const SliderOptions = {
 	dots: true,
@@ -21,17 +38,63 @@ const SliderOptions = {
 };
 
 const ProductDetails = () => {
+	const [quantity, setQuantity] = useState(1);
+	const [dialogOpen, setDialogOpen] = useState(false);
+	const [rating, setRating] = useState(4);
+	const [comment, setComment] = useState("");
+
 	const dispatch = useDispatch();
 	const match = useMatch("/product/:id");
+	const alert = useAlert();
 
 	const { loading, product, error } = useSelector(
 		(state) => state.productDetails
 	);
-
+	const { success, error: reviewError } = useSelector(
+		(state) => state.newReview
+	);
 	useEffect(() => {
+		if (error) {
+			alert.error(error);
+			dispatch(clearErrors());
+		}
+		if (reviewError) {
+			alert.error(reviewError);
+			dispatch(clearErrors());
+		}
+		if (success) {
+			alert.success("Review added successfully");
+			dispatch({ type: NEW_REVIEW_REQUEST });
+		}
 		dispatch(getSingleProductDetails(match.params.id));
-	}, [dispatch]);
+	}, [dispatch, alert, match.params.id, success]);
 
+	const increaseQuantity = () => {
+		if (product.stock <= quantity) return;
+		setQuantity(quantity + 1);
+	};
+
+	const decreaseQuantity = () => {
+		if (quantity > 1) setQuantity(quantity - 1);
+	};
+	const handleAddToCart = () => {
+		dispatch(addItemsToCart(match.params.id, quantity));
+		alert.success("Item added to cart successfully");
+	};
+
+	const submitReviewToggle = () => {
+		setDialogOpen(!dialogOpen);
+		setComment("");
+	};
+	const submitReview = () => {
+		const myForm = new FormData();
+		myForm.set("rating", rating);
+		myForm.set("comment", comment);
+		myForm.set("productId", match.params.id);
+		dispatch(newReview(myForm));
+		setDialogOpen(false);
+		setComment("");
+	};
 	return product ? (
 		<>
 			<div className='product-details'>
@@ -68,12 +131,18 @@ const ProductDetails = () => {
 					<div className='details-block-3'>
 						<div className='cart-options'>
 							<div className='quantity'>
-								<span>{<BiPlusCircle fill='#ef5350' />}</span>
-								<input value={1} type='text' disabled />
-								<span>{<BiMinusCircle fill='#66bb6a' />}</span>
+								<button onClick={increaseQuantity}>
+									<BiPlusCircle
+										fill={product.stock > quantity ? "#32CD32" : "#808080"}
+									/>
+								</button>
+								<input value={quantity} disabled />
+								<button onClick={decreaseQuantity}>
+									<BiMinusCircle fill={quantity > 1 ? "#ef5350" : "#808080"} />
+								</button>
 							</div>
-							<button>
-								Add to cart
+							<button disabled={product.stock <= 0} onClick={handleAddToCart}>
+								{product.stock <= 0 ? "Out of Stock" : "Add to cart"}
 								<span>
 									<FaCartPlus fill='#f1ca3a' />
 								</span>{" "}
@@ -83,9 +152,48 @@ const ProductDetails = () => {
 							Status:<b>{product.stock > 0 ? "In Stock" : "Out of stock"}</b>
 						</p>
 					</div>
-					<button className='add-review'>Add Review</button>
+					<button
+						onClick={() => {
+							setDialogOpen(true);
+						}}
+						className='add-review'
+					>
+						Add Review
+					</button>
 				</div>
 			</div>
+			<Dialog
+				aria-labelledby='simple-dialog-title'
+				open={dialogOpen}
+				// onClose={submitReviewToggle}
+			>
+				<DialogTitle>Submit Review</DialogTitle>
+				<DialogContent className='submit-dialog'>
+					<div className='submit-stars'>
+						{" "}
+						<AiFillStar fill='#ffc107' />
+						<AiFillStar fill='#ffc107' />
+						<AiFillStar fill='#ffc107' />
+						<AiFillStar fill='#ffc107' />
+						<AiFillStar fill='#ffc107' />
+					</div>
+					<textarea
+						className='submit-dailog-textarea'
+						cols='30'
+						rows='5'
+						value={comment}
+						onChange={(e) => setComment(e.target.value)}
+					></textarea>
+					<DialogActions>
+						<Button color='primary' onClick={submitReview}>
+							Submit
+						</Button>
+						<Button color='secondary' onClick={submitReviewToggle}>
+							Cancel
+						</Button>
+					</DialogActions>
+				</DialogContent>
+			</Dialog>
 			<div className='reviews-section'>
 				{[11, 2, 2, 2, 3].map(() => (
 					<ReviewCard />

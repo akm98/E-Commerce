@@ -6,16 +6,14 @@ import { HiOutlineMail } from "react-icons/hi";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
-import { resetUserPassword } from "../../redux/actions/userActions";
+import { forgotUserPassword } from "../../redux/actions/userActions";
 
 import Loader from "../Loader/Loader";
 
 const ForgotPassword = () => {
 	const [email, setEmail] = useState("");
 
-	const { resetData, error, loading } = useSelector(
-		(state) => state.resetPassword
-	);
+	const { resetData, error, loading } = useSelector((state) => state.password);
 
 	const alert = useAlert();
 	const dispatch = useDispatch();
@@ -31,13 +29,13 @@ const ForgotPassword = () => {
 
 	const handleReset = (e) => {
 		e.preventDefault();
-		dispatch(resetUserPassword(email));
+		dispatch(forgotUserPassword(email));
 	};
 
 	return (
 		<div className='update-container'>
 			<div className='update-form'>
-				<h3>Enter your email for reset password link</h3>
+				<h3>Forgot password </h3>
 				<form className='user-form' onSubmit={handleReset}>
 					<div className='update-email'>
 						<HiOutlineMail />
