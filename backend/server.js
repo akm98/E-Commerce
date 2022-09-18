@@ -1,5 +1,5 @@
 const app = require("./app");
-const dotenv = require("dotenv");
+
 const cloudinary = require("cloudinary");
 const connectDB = require("./config/database");
 
@@ -9,7 +9,9 @@ process.on("uncaughtException", (err) => {
 	process.exit(1);
 });
 
-dotenv.config({ path: "backend/config/config.env" });
+if (process.env.NODE_ENV !== "PRODUCTION") {
+	require("dotenv").config({ path: "backend/config/config.env" });
+}
 
 // handled 3 types of error
 // 1 is wrong payload err in api --- ref-> error.js
