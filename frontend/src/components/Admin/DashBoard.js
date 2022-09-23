@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./DashBoard.css";
 import { HiLockClosed, HiUserCircle } from "react-icons/hi";
 import { GoNote } from "react-icons/go";
@@ -12,6 +12,7 @@ import { useAlert } from "react-alert";
 import { clearErrors, newProduct } from "../../redux/actions/productActions";
 
 const DashBoard = () => {
+	const { loading, success } = useSelector((state) => state.newOrder);
 	const [product, setProduct] = useState({
 		name: "",
 		desc: "",
@@ -31,6 +32,24 @@ const DashBoard = () => {
 
 	const dispatch = useDispatch();
 	const alert = useAlert();
+
+	useEffect(() => {
+		if (error) {
+			alert.error(error);
+			dispatch(clearErrors());
+		} else if (success) {
+			alert.success("Product was successfully Added");
+			setProduct({
+				name: "",
+				desc: "",
+				price: "",
+				images: [],
+				stock: "",
+				category: "",
+			});
+		}
+	}, [error, success]);
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const myForm = new FormData();
@@ -166,7 +185,12 @@ const DashBoard = () => {
 						))}
 					</div>
 
-					<input type='submit' className='btn-create' value='Add Product' />
+					<input
+						type='submit'
+						className='btn-create'
+						disabled={loading}
+						value='Add Product'
+					/>
 				</form>
 			</div>
 		</>
