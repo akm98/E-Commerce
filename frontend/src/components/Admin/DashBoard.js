@@ -10,9 +10,12 @@ import { BiCategory, BiRupee } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
 import { clearErrors, newProduct } from "../../redux/actions/productActions";
-
+import Loader from "../Loader/Loader";
 const DashBoard = () => {
-	const { loading, success } = useSelector((state) => state.newOrder);
+	const { loading, success, error } = useSelector(
+		(state) => state.addNewProduct
+	);
+
 	const [product, setProduct] = useState({
 		name: "",
 		desc: "",
@@ -34,6 +37,7 @@ const DashBoard = () => {
 	const alert = useAlert();
 
 	useEffect(() => {
+		console.log("asdasd");
 		if (error) {
 			alert.error(error);
 			dispatch(clearErrors());
@@ -47,8 +51,9 @@ const DashBoard = () => {
 				stock: "",
 				category: "",
 			});
+			setImagesPreview([]);
 		}
-	}, [error, success]);
+	}, [dispatch, error, success]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -64,7 +69,6 @@ const DashBoard = () => {
 			myForm.append("images", image);
 		});
 
-		console.log("myform", myForm.getAll("images"));
 		dispatch(newProduct(myForm));
 	};
 
@@ -103,7 +107,9 @@ const DashBoard = () => {
 		};
 		reader.readAsDataURL(e.target.files[0]);
 	};
-	return (
+	return loading ? (
+		<Loader />
+	) : (
 		<>
 			<div className='dashboard-container'>
 				<h3>Add Product</h3>

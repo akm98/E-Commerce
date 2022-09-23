@@ -8,6 +8,7 @@ import { useMatch } from "react-router-dom";
 import Pagination from "react-js-pagination";
 import { Slider } from "@mui/material";
 import MetaData from "../Header/MetaData";
+import Loader from "../Loader/Loader";
 
 const categories = [
 	"Health",
@@ -51,7 +52,9 @@ const Results = () => {
 		setPrice(newPrice);
 	};
 
-	return (
+	return loading ? (
+		<Loader />
+	) : (
 		<>
 			<MetaData title='Products Results' />
 			<div className='product-filters'>

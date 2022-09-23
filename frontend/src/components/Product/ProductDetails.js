@@ -26,6 +26,7 @@ import {
 	NEW_REVIEW_REQUEST,
 	NEW_REVIEW_SUCCESS,
 } from "../../redux/constants/productConstants";
+import Loader from "../Loader/Loader";
 
 const SliderOptions = {
 	dots: true,
@@ -210,7 +211,7 @@ const ProductDetails = () => {
 			</div>
 		</>
 	) : (
-		"Loading ..."
+		<Loader />
 	);
 };
 

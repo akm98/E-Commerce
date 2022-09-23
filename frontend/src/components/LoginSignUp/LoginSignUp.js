@@ -8,6 +8,7 @@ import Profile from "../../Assets/profile.png";
 import { useDispatch, useSelector } from "react-redux";
 import { useAlert } from "react-alert";
 import { clearErrors, login, register } from "../../redux/actions/userActions";
+import Loader from "../Loader/Loader";
 
 function LoginSignUp() {
 	const [user, setUser] = useState({
@@ -78,7 +79,9 @@ function LoginSignUp() {
 		};
 		reader.readAsDataURL(e.target.files[0]);
 	};
-	return (
+	return loading ? (
+		<Loader />
+	) : (
 		<div className='login-container'>
 			<div className='login-form'>
 				<div className='tabs'>
