@@ -32,9 +32,9 @@ app.use("/api/", paymentRoutes);
 // Middleware for errors
 app.use(errorMiddleWare);
 
-// app.use(express.static(path.join(__dirname, "../frontend/build")));
-// app.get("*", (req, res) => {
-// 	res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
-// });
+app.use(express.static(path.join(__dirname, "../frontend/build")));
+app.get("*", (req, res) => {
+	res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
+});
 
 module.exports = app;
