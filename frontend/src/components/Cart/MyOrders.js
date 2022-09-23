@@ -7,6 +7,7 @@ import MetaData from "../Header/MetaData";
 import { clearErrors, myOrder } from "../../redux/actions/orderActions";
 import { useNavigate, Link } from "react-router-dom";
 import { MdLaunch } from "react-icons/md";
+import Loader from "../Loader/Loader";
 
 const MyOrders = () => {
 	const alert = useAlert();
@@ -88,7 +89,7 @@ const MyOrders = () => {
 		<>
 			<MetaData title={`${user && user.name} - Orders`} />
 			{loading ? (
-				<div>Loading</div>
+				<Loader />
 			) : (
 				<div className='my-orders-page'>
 					<DataGrid

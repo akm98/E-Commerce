@@ -7,6 +7,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { useMatch } from "react-router-dom";
 import { clearErrors, getOrderDetails } from "../../redux/actions/orderActions";
 import "./ConfirmOrder.css";
+import Loader from "../Loader/Loader";
 const OrderDetails = () => {
 	const alert = useAlert();
 	const dispatch = useDispatch();
@@ -28,7 +29,7 @@ const OrderDetails = () => {
 	return (
 		<>
 			{loading ? (
-				<div>Loading</div>
+				<Loader />
 			) : (
 				<>
 					<MetaData title={`OrderDetails`} />
