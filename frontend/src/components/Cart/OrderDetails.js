@@ -81,8 +81,6 @@ const OrderDetails = () => {
 							</div>
 						</div>
 
-						{/* {} */}
-						{console.log(order)}
 						<div>
 							<div className='order-summary'>
 								<h3>Payment Summary</h3>

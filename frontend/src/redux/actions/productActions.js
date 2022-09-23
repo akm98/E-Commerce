@@ -87,7 +87,9 @@ export const newProduct = (product) => async (dispatch) => {
 	} catch (err) {
 		dispatch({
 			type: ADD_NEW_PRODUCT_FAIL,
-			payload: err.response.data.message,
+			payload: err.response.data
+				? err.response.data.message
+				: "An unkonwn error occurred",
 		});
 	}
 };

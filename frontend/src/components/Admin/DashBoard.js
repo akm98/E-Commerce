@@ -37,7 +37,6 @@ const DashBoard = () => {
 	const alert = useAlert();
 
 	useEffect(() => {
-		console.log("asdasd");
 		if (error) {
 			alert.error(error);
 			dispatch(clearErrors());

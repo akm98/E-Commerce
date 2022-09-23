@@ -154,16 +154,7 @@ function LoginSignUp() {
 										onChange={registerDataChange}
 									/>
 								</div>
-								<div className='signup-password-2'>
-									<HiLockClosed />
-									<input
-										type='password'
-										placeholder='Re-enter Password'
-										name='password'
-										value={user.password}
-										onChange={registerDataChange}
-									/>
-								</div>
+
 								<div className='upload-avatar'>
 									<img src={avatarPreview} alt='Avatar Preview' />
 									<input
