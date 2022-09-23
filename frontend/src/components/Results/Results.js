@@ -22,7 +22,7 @@ const categories = [
 const Results = () => {
 	const [currentPage, setCurrentPage] = useState(1);
 	const [category, setCategory] = useState("");
-	const [price, setPrice] = useState([0, 25000]);
+	const [price, setPrice] = useState([0, 100000]);
 
 	const match = useMatch("/results/:keyword");
 	const dispatch = useDispatch();
@@ -65,7 +65,7 @@ const Results = () => {
 							category={e.category}
 							ratings={e.ratings}
 							id={e._id}
-							image={e.images[0].url}
+							image={e.images.length > 0 ? e.images[0].url : ""}
 						/>
 					))}
 			</div>

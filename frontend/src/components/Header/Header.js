@@ -30,7 +30,7 @@ const Header = () => {
 		<>
 			<nav>
 				<div className='icon'>
-					<Link to='/'>Akm Store</Link>
+					<Link to='/'>My Web Store</Link>
 				</div>
 				<div className='search-box'>
 					<input

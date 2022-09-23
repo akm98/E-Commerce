@@ -1,0 +1,85 @@
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1vmax;
+}
+
+.dashboard-container input,
+.dashboard-container select {
+  height: 3vmax;
+  width: 20vmax;
+  padding-inline: 2.5vmax;
+  position: relative;
+  cursor: text;
+}
+.dashboard-container textarea {
+  height: 6vmax;
+  width: 20vmax;
+  padding-inline: 2vmax;
+  position: relative;
+  cursor: text;
+}
+.description-box > svg {
+  position: relative;
+  left: 26px;
+  top: -5vmax;
+  z-index: 1;
+}
+.dashboard-container svg {
+  position: relative;
+  left: 26px;
+  z-index: 1;
+}
+
+.dashboard-container form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.dashboard-container form > div {
+  padding: 0.7vmax;
+  margin: auto;
+}
+
+.upload-images > input::file-selector-button {
+  background-color: #25619c;
+  color: white;
+  border: none;
+  padding: 0.5vmax 1vmax;
+  border-radius: 6px;
+}
+
+.btn-create {
+  border-radius: 6px;
+  margin-block-start: 1vmax;
+  background-color: #25619c;
+  border: 0px;
+  color: white;
+  margin-inline: auto;
+}
+
+.preview-images {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  align-items: flex-start;
+}
+.preview-images > img {
+  max-width: 4vmax;
+  max-height: 4vmax;
+}
+
+@media screen and (max-width: 1000px) {
+  .dashboard-container input {
+    height: 5vmax;
+    padding-inline: 3.5vmax;
+    width: 30vmax;
+  }
+  .upload-images > img {
+    position: relative;
+    max-width: 4vmax;
+    left: 6vmax;
+  }
+}

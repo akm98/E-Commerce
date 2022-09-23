@@ -17,7 +17,7 @@ nav {
   z-index: 2;
 }
 nav .icon {
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 600;
   color: rgb(0, 0, 0);
   cursor: pointer;
@@ -32,16 +32,16 @@ nav ol li {
   margin: 0 2px;
 }
 nav ol li a {
-  color: rgb(103, 0, 162);
   font-size: 1vmax;
   text-decoration: none;
   text-transform: capitalize;
   padding: 5px 10px;
-}
-nav ol li:hover a {
-  background-color: navy;
+  background-color: #25619c;
+  border-radius: 6px;
+  padding: 0.5vmax;
   color: #fff !important;
 }
+
 nav .search-box {
   display: flex;
   margin: 0;
@@ -60,7 +60,7 @@ nav .search-box input {
 nav .search-box span {
   color: rgba(0, 0, 0);
   /* font-size: 20px; */
-  background: rgb(241, 202, 58);
+  background: #ffb15e;
   height: 100%;
   position: relative;
   cursor: pointer;
@@ -129,21 +129,21 @@ nav .bar span {
     width: 80%;
   }
   nav ol {
-    display: flex;
-    flex-direction: column;
+    position: absolute;
     height: 0;
-    visibility: hidden;
+    top: 2vmax;
+    right: 10px;
     transition: 0.3s;
   }
   nav ol li {
     text-align: center;
     transition: 0.3s 0.1s all;
-    opacity: 0;
+    opacity: 1;
   }
   nav ol li a {
     color: #000;
-    font-size: 2vmax;
-    padding: 25px;
+    font-size: 1.7vmax;
+    padding: 0.5vmax 1vmax;
     display: block;
   }
 

@@ -58,8 +58,9 @@
   border: none;
   margin: 0;
   padding: 0 1vmax;
-  color: white;
-  background-color: darkslateblue;
+  color: black;
+  background-color: #ffb15e;
+  border-radius: 6px;
 }
 .btn-update {
   margin-block-start: 1vmax;

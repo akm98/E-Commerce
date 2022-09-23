@@ -2,14 +2,13 @@
   max-width: 100vmax;
   box-sizing: border-box;
   padding: 6vmax;
-  display: grid;
-  grid-template-columns: auto auto;
+  display: flex;
   transition: all 0.5s;
 }
 .product-detail-slider {
-  max-width: 25vmax;
-  /* border: 1px solid green; */
-  margin-inline: 2vmax;
+  width: 50%;
+  box-shadow: 0 0 3px gray;
+  margin: 0 2vmax;
 }
 
 .product-detail-images {
@@ -103,12 +102,96 @@
 .submit-stars {
   font-size: 2vmax;
 }
-.MuiDialogTitle-root {
-}
+
 .submit-dailog-textarea {
   border: 1px solid grey;
   border-radius: 5px;
   margin: 1vmax 0;
   outline: none;
   padding: 1rem;
+}
+@media screen and (max-width: 600px) {
+  .product-details {
+    flex-direction: column;
+    height: unset;
+  }
+  .product-detail-slider {
+    width: 100%;
+    margin: 0;
+    margin-bottom: 3vmax;
+  }
+  .product-details > div:last-child {
+    align-items: center;
+  }
+
+  .details-block-1 > h2 {
+    font-size: 2.8vmax;
+    text-align: center;
+  }
+
+  .details-block-1 > p {
+    text-align: center;
+    font-size: 1vmax;
+  }
+
+  .details-block-2 {
+    justify-content: center;
+  }
+  .details-block-2 > span {
+    font-size: 1.5vmax;
+  }
+
+  .details-block-3 > h1 {
+    text-align: center;
+  }
+
+  .details-block-3-1 {
+    flex-direction: column;
+  }
+
+  .details-block-3-1-1 {
+    padding: 2vmax 0;
+  }
+  .details-block-3-1-1 > button {
+    padding: 1.2vmax;
+    width: 4vmax;
+  }
+
+  .details-block-3-1-1 > input {
+    padding: 1.5vmax;
+    width: 3vmax;
+  }
+
+  .details-block-3-1 > button:last-child {
+    padding: 1.5vmax;
+    width: 20vmax;
+    margin: 3vmax 0;
+  }
+
+  .details-block-3 > p {
+    padding: 2.5vmax 0;
+  }
+
+  .quantity > button {
+    background-color: transparent;
+    border: 0;
+    font-size: 4vmax;
+  }
+  .cart-options > button {
+    font-size: 1.5vmax;
+    width: auto;
+    height: auto;
+    padding: 1vmax;
+  }
+  .cart-options > button > span {
+    font-size: 2vmax;
+    margin-inline-start: 3px;
+  }
+  .cart-options > button:hover {
+    width: auto;
+    font-size: 1.5vmax;
+  }
+  .add-review {
+    padding: 1vmax;
+  }
 }

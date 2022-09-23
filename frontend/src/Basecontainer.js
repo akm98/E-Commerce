@@ -11,7 +11,7 @@ import Test from "./Test";
 import ProductDetails from "./components/Product/ProductDetails";
 import LoginSignUp from "./components/LoginSignUp/LoginSignUp";
 import store from "./redux/store";
-import { loadUser } from "./redux/actions/userActions";
+import { loadUser, clearErrors } from "./redux/actions/userActions";
 import { useSelector } from "react-redux";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
@@ -26,15 +26,20 @@ import OrderSuccess from "./components/Cart/OrderSuccess";
 import OrderDetails from "./components/Cart/OrderDetails";
 import MyOrders from "./components/Cart/MyOrders";
 import NotFound from "./components/NotFound/NotFound";
+import DashBoard from "./components/Admin/DashBoard";
 
 const BaseContainer = () => {
 	const { isAuthenticated, user } = useSelector((state) => state.user);
-
+	let isAdmin = "guest";
+	if (isAuthenticated) {
+		isAdmin = user.role === "admin";
+	}
 	useEffect(() => {
 		store.dispatch(loadUser());
+		store.dispatch(clearErrors());
 	}, []);
 
-	window.addEventListener("contextmenu", (e) => e.preventDefault());
+	// window.addEventListener("contextmenu", (e) => e.preventDefault());
 
 	const stripeApiKey =
 		"pk_test_51LikXvSGjLPx0kbgVJv3IVeH72NKmUyiUE9aMbl8HXycQwKamI8VSzKNvzvgXWimiiUigbQLra5mwXyjvH2Bfrod00RwugBosC";
@@ -47,32 +52,82 @@ const BaseContainer = () => {
 				<Routes>
 					<Route exact path='/test' element={<Test />} />
 					<Route exact path='/product/:id' element={<ProductDetails />} />
-					<Route exact path='/cart' element={<Cart />} />
-					<Route exact path='/profile' element={<Profile />} />
-					<Route exact path='/' element={<HomePage />} />
 					<Route exact path='/results/:keyword' element={<Results />} />
 					<Route exact path='/login' element={<LoginSignUp />} />
-					<Route exact path='/profile/update' element={<UpdateProfile />} />
-					<Route exact path='/password/update' element={<UpdatePassword />} />
-					<Route exact path='/password/forgot' element={<ForgotPassword />} />
+					<Route exact path='/' element={<HomePage />} />
+
+					<Route
+						exact
+						path='/cart'
+						element={isAuthenticated ? <Cart /> : <LoginSignUp />}
+					/>
+					<Route
+						exact
+						path='/profile'
+						element={isAuthenticated ? <Profile /> : <LoginSignUp />}
+					/>
+					<Route
+						exact
+						path='/profile/update'
+						element={isAuthenticated ? <UpdateProfile /> : <LoginSignUp />}
+					/>
+					<Route
+						exact
+						path='/password/update'
+						element={isAuthenticated ? <UpdatePassword /> : <LoginSignUp />}
+					/>
+					<Route
+						exact
+						path='/password/forgot'
+						element={isAuthenticated ? <ForgotPassword /> : <LoginSignUp />}
+					/>
 					<Route
 						exact
 						path='/password/reset/:token'
-						element={<ResetPassword />}
+						element={isAuthenticated ? <ResetPassword /> : <LoginSignUp />}
 					/>
-					<Route exact path='/shipping' element={<Shipping />} />
-					<Route exact path='/order/confirm' element={<ConfirmOrder />} />
-					<Route exact path='/order/success' element={<OrderSuccess />} />
-					<Route exact path='/orders' element={<MyOrders />} />
-					<Route exact path='/order/:id' element={<OrderDetails />} />
+					<Route
+						exact
+						path='/shipping'
+						element={isAuthenticated ? <Shipping /> : <LoginSignUp />}
+					/>
+					<Route
+						exact
+						path='/order/confirm'
+						element={isAuthenticated ? <ConfirmOrder /> : <LoginSignUp />}
+					/>
+					<Route
+						exact
+						path='/order/success'
+						element={isAuthenticated ? <OrderSuccess /> : <LoginSignUp />}
+					/>
+					<Route
+						exact
+						path='/orders'
+						element={isAuthenticated ? <MyOrders /> : <LoginSignUp />}
+					/>
+					<Route
+						exact
+						path='/order/:id'
+						element={isAuthenticated ? <OrderDetails /> : <LoginSignUp />}
+					/>
 					<Route
 						exact
 						path='/order/payment'
 						element={
-							<Elements stripe={loadStripe(stripeApiKey)}>
-								<ProcessPayment />
-							</Elements>
+							isAuthenticated ? (
+								<Elements stripe={loadStripe(stripeApiKey)}>
+									<ProcessPayment />
+								</Elements>
+							) : (
+								<LoginSignUp />
+							)
 						}
+					/>
+					<Route
+						exact
+						path='/admin/dashboard'
+						element={isAuthenticated ? <DashBoard /> : <LoginSignUp />}
 					/>
 					<Route path='*' element={<NotFound />} />
 				</Routes>

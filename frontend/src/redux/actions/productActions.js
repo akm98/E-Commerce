@@ -10,10 +10,13 @@ import {
 	NEW_REVIEW_REQUEST,
 	NEW_REVIEW_SUCCESS,
 	NEW_REVIEW_FAIL,
+	ADD_NEW_PRODUCT_REQUEST,
+	ADD_NEW_PRODUCT_SUCCESS,
+	ADD_NEW_PRODUCT_FAIL,
 } from "../constants/productConstants";
 
 export const getProducts =
-	(keyword = "", page = 1, price = [0, 25000], category, ratings) =>
+	(keyword = "", page = 1, price = [0, 75000], category, ratings) =>
 	async (dispatch) => {
 		try {
 			dispatch({ type: ALL_PRODUCT_REQUEST });
@@ -66,6 +69,24 @@ export const newReview = (reviewData) => async (dispatch) => {
 	} catch (err) {
 		dispatch({
 			type: NEW_REVIEW_FAIL,
+			payload: err.response.data.message,
+		});
+	}
+};
+
+export const newProduct = (product) => async (dispatch) => {
+	try {
+		dispatch({ type: ADD_NEW_PRODUCT_REQUEST });
+
+		// const formDataObj = Object.fromEntries(product.entries());
+		// formDataObj.images = product.getAll("images");
+
+		const config = { headers: { "Content-Type": "multipart/form-data" } };
+		const { data } = await axios.post("/api/products/new", product, config);
+		dispatch({ type: ADD_NEW_PRODUCT_SUCCESS, payload: data });
+	} catch (err) {
+		dispatch({
+			type: ADD_NEW_PRODUCT_FAIL,
 			payload: err.response.data.message,
 		});
 	}

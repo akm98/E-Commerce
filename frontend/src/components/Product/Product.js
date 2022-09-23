@@ -11,7 +11,7 @@ const Product = (props) => {
 
 	return (
 		<>
-			<Link className='product-card' to={`product/${id}`}>
+			<Link className='product-card' to={`/product/${id}`}>
 				<img
 					src={
 						image === "sample url"

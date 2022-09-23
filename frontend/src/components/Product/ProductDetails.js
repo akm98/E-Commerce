@@ -95,10 +95,19 @@ const ProductDetails = () => {
 		setDialogOpen(false);
 		setComment("");
 	};
+	const homeSliderOptions = {
+		dots: true,
+		infinite: true,
+		speed: 500,
+		slidesToShow: 1,
+		slidesToScroll: 1,
+		nextArrow: <NextArrow />,
+		prevArrow: <PrevArrow />,
+	};
 	return product ? (
 		<>
 			<div className='product-details'>
-				<Slider className='product-detail-slider'>
+				<Slider {...homeSliderOptions} className='product-detail-slider'>
 					{product.images &&
 						product.images.map((each, i) => (
 							<div>
@@ -111,7 +120,7 @@ const ProductDetails = () => {
 							</div>
 						))}
 				</Slider>
-				<div>
+				<div className='details-parent'>
 					<div className='details-block-1'>
 						<h2>{product.name}</h2>
 						<p>{product._id}</p>
@@ -185,7 +194,7 @@ const ProductDetails = () => {
 						onChange={(e) => setComment(e.target.value)}
 					></textarea>
 					<DialogActions>
-						<Button color='primary' onClick={submitReview}>
+						<Button color='primary' onClick={submitReview} className='btn'>
 							Submit
 						</Button>
 						<Button color='secondary' onClick={submitReviewToggle}>

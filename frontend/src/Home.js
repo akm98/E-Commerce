@@ -81,17 +81,26 @@ const HomePage = () => {
 		<Loader />
 	) : (
 		<>
-			<MetaData title='AKM STORE' />
+			<MetaData title='My Web Store' />
 			<div className='container'>
 				<Slider {...homeSliderOptions} className='slider-main'>
 					<div className='image-container'>
-						<img src='https://i.imgur.com/X99e6jS.jpg' alt='First slide' />
+						<img
+							src='https://res.cloudinary.com/dzcq96g85/image/upload/v1663831536/Home%20Screen/diwali-topbanner-pc_ypkkxo.webp'
+							alt='First slide'
+						/>
 					</div>
 					<div className='image-container'>
-						<img src='https://i.imgur.com/hMR8nTl.jpg' alt='Second slide' />
+						<img
+							src='https://res.cloudinary.com/dzcq96g85/image/upload/v1663831536/Home%20Screen/diwali-topbanner-pc_ypkkxo.webp'
+							alt='Second slide'
+						/>
 					</div>
 					<div className='image-container'>
-						<img src='https://i.imgur.com/eodVcYw.jpg' alt='Third slide' />
+						<img
+							src='https://res.cloudinary.com/dzcq96g85/image/upload/v1663831536/Home%20Screen/diwali-topbanner-pc_ypkkxo.webp'
+							alt='Third slide'
+						/>
 					</div>
 				</Slider>
 				<div className='product-section'>

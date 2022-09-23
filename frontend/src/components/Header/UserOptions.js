@@ -44,7 +44,9 @@ const UserOptions = ({ user }) => {
 		navigate("/profile");
 	};
 
-	const dashboard = () => {};
+	const dashboard = () => {
+		navigate("/admin/dashboard");
+	};
 
 	const options = [
 		{ icon: <HiOutlineShoppingBag />, name: "Orders", func: orders },

@@ -17,7 +17,9 @@ const errorMiddleWare = require("./Middleware/error");
 const cookieParser = require("cookie-parser");
 
 const app = express();
-app.use(express.json()); //????
+
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload());
@@ -30,9 +32,9 @@ app.use("/api/", paymentRoutes);
 // Middleware for errors
 app.use(errorMiddleWare);
 
-app.use(express.static(path.join(__dirname, "../frontend/build")));
-app.get("*", (req, res) => {
-	res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
-});
+// app.use(express.static(path.join(__dirname, "../frontend/build")));
+// app.get("*", (req, res) => {
+// 	res.sendFile(path.resolve(__dirname, "../frontend/build/index.html"));
+// });
 
 module.exports = app;
