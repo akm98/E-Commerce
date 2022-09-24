@@ -86,19 +86,19 @@ const HomePage = () => {
 				<Slider {...homeSliderOptions} className='slider-main'>
 					<div className='image-container'>
 						<img
-							src='https://res.cloudinary.com/dzcq96g85/image/upload/v1663831536/Home%20Screen/diwali-topbanner-pc_ypkkxo.webp'
+							src='https://res.cloudinary.com/dzcq96g85/image/upload/v1663997004/Home%20Screen/banner3_n1xujg.jpg'
 							alt='First slide'
 						/>
 					</div>
 					<div className='image-container'>
 						<img
-							src='https://res.cloudinary.com/dzcq96g85/image/upload/v1663831536/Home%20Screen/diwali-topbanner-pc_ypkkxo.webp'
+							src='https://res.cloudinary.com/dzcq96g85/image/upload/v1663997005/Home%20Screen/banner2_nfclhq.jpg'
 							alt='Second slide'
 						/>
 					</div>
 					<div className='image-container'>
 						<img
-							src='https://res.cloudinary.com/dzcq96g85/image/upload/v1663831536/Home%20Screen/diwali-topbanner-pc_ypkkxo.webp'
+							src='https://res.cloudinary.com/dzcq96g85/image/upload/v1663997005/Home%20Screen/banner4_h4xcr0.jpg'
 							alt='Third slide'
 						/>
 					</div>
