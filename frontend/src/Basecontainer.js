@@ -58,6 +58,12 @@ const BaseContainer = () => {
 					<Route exact path='/password/forgot' element={<ForgotPassword />} />
 					<Route
 						exact
+						path='/password/reset/:token'
+						element={<ResetPassword />}
+					/>
+
+					<Route
+						exact
 						path='/cart'
 						element={isAuthenticated ? <Cart /> : <LoginSignUp />}
 					/>
@@ -77,11 +83,6 @@ const BaseContainer = () => {
 						element={isAuthenticated ? <UpdatePassword /> : <LoginSignUp />}
 					/>
 
-					<Route
-						exact
-						path='/password/reset/:token'
-						element={isAuthenticated ? <ResetPassword /> : <LoginSignUp />}
-					/>
 					<Route
 						exact
 						path='/shipping'
