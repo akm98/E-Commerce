@@ -29,6 +29,8 @@ import MyOrders from "./components/Cart/MyOrders";
 import NotFound from "./components/NotFound/NotFound";
 import DashBoard from "./components/Admin/DashBoard";
 
+ReactGA.initialize("337586757");
+
 const BaseContainer = () => {
 	const { isAuthenticated, user } = useSelector((state) => state.user);
 	let isAdmin = "guest";
@@ -38,7 +40,7 @@ const BaseContainer = () => {
 	useEffect(() => {
 		store.dispatch(loadUser());
 		store.dispatch(clearErrors());
-		ReactGA.initialize("337586757", []);
+		ReactGA.pageview(window.location.pathname + window.location.search);
 	}, []);
 
 	// window.addEventListener("contextmenu", (e) => e.preventDefault());
