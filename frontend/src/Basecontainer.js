@@ -47,7 +47,7 @@ const BaseContainer = () => {
 		ReactGA.send({ hitType: "pageview", page: window.location.pathname });
 	}, []);
 
-	// window.addEventListener("contextmenu", (e) => e.preventDefault());
+	window.addEventListener("contextmenu", (e) => e.preventDefault());
 
 	const stripeApiKey =
 		"pk_test_51LikXvSGjLPx0kbgVJv3IVeH72NKmUyiUE9aMbl8HXycQwKamI8VSzKNvzvgXWimiiUigbQLra5mwXyjvH2Bfrod00RwugBosC";
