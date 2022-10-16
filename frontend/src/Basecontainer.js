@@ -31,7 +31,7 @@ import DashBoard from "./components/Admin/DashBoard";
 
 ReactGA.initialize([
 	{
-		trackingId: "337586757",
+		trackingId: "G-FVY7YZN41C",
 	},
 ]);
 
