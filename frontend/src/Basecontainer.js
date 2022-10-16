@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import ReactGA from "react-ga";
+import ReactGA from "react-ga4";
 import Cart from "./components/Cart/Cart";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
@@ -29,7 +29,11 @@ import MyOrders from "./components/Cart/MyOrders";
 import NotFound from "./components/NotFound/NotFound";
 import DashBoard from "./components/Admin/DashBoard";
 
-ReactGA.initialize("337586757");
+ReactGA.initialize([
+	{
+		trackingId: "337586757",
+	},
+]);
 
 const BaseContainer = () => {
 	const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -40,7 +44,7 @@ const BaseContainer = () => {
 	useEffect(() => {
 		store.dispatch(loadUser());
 		store.dispatch(clearErrors());
-		ReactGA.pageview(window.location.pathname + window.location.search);
+		ReactGA.send({ hitType: "pageview", page: window.location.pathname });
 	}, []);
 
 	// window.addEventListener("contextmenu", (e) => e.preventDefault());
