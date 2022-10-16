@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ReactGA from "react-ga";
 import Cart from "./components/Cart/Cart";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
@@ -37,6 +38,8 @@ const BaseContainer = () => {
 	useEffect(() => {
 		store.dispatch(loadUser());
 		store.dispatch(clearErrors());
+		ReactGA.initialize(process.env.REACT_GA_ID, []);
+		console.log(process.env.REACT_GA_ID);
 	}, []);
 
 	// window.addEventListener("contextmenu", (e) => e.preventDefault());
