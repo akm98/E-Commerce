@@ -38,8 +38,7 @@ const BaseContainer = () => {
 	useEffect(() => {
 		store.dispatch(loadUser());
 		store.dispatch(clearErrors());
-		ReactGA.initialize(process.env.REACT_GA_ID, []);
-		console.log(process.env.REACT_GA_ID);
+		ReactGA.initialize("337586757", []);
 	}, []);
 
 	// window.addEventListener("contextmenu", (e) => e.preventDefault());
