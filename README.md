@@ -6,4 +6,4 @@ Node JS and Express for backend with MongoDB as database. All the dynamic data r
 through various api’s. The payment gateway is integrated using the stripe sdk. The data is stored in the NO SQL format
 in the mongo-db cloud server. 
 
-This project is deployed in heroku app and is live on this Website link https://akm-store-test.herokuapp.com/
+This project is deployed in heroku app and is live on this Website link https://akm-web-store-ui.vercel.app/
